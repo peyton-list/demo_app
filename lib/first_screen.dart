@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 
 import 'login_page.dart';
 import 'sign_in.dart';
+import 'check.dart';
 //import 'package:sign_in_flutter/login_page.dart';
 //import 'package:sign_in_flutter/sign_in.dart';
 
@@ -80,7 +81,7 @@ class FirstScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
-              RaisedButton(
+              FlatButton(
                 onPressed: () {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
@@ -93,10 +94,28 @@ class FirstScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ),
-                elevation: 5,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-              )
+                    borderRadius: BorderRadius.circular(5)),
+              ),
+              SizedBox(height: 10),
+              FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Check()),
+                  );
+                },
+                color: Colors.deepPurple,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Track Data',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+              ),
             ],
           ),
         ),
