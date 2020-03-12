@@ -35,15 +35,53 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlutterLogo(size: 150),
-              SizedBox(height: 50),
-              _signInButton(),
-            ],
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top:50),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+//          mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+//              FlutterLogo(size: 150),
+                Image(
+                  image: AssetImage('assets/illustration.png'),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 50),
+                ),
+                Text(
+                  'Your Personal',
+                  style: TextStyle(
+                    color: Colors.deepPurple,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Fitness Trainer'.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 48,
+                    color: Colors.deepPurple,
+                    fontFamily: 'Bebas',
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                ),
+                Text(
+                  'Fitness Trainer is an application developed by students of 6CSE as a part of 6th semester SGP project',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 50),
+                _signInButton(),
+              ],
+            ),
           ),
         ),
       ),
