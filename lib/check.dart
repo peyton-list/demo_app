@@ -4,6 +4,7 @@ import 'package:health/health.dart';
 import 'fit_check_demo.dart';
 import 'fetish.dart';
 import 'step.dart';
+import 'sleep.dart';
 
 void main() => runApp(Check());
 
@@ -116,7 +117,7 @@ class _CheckState extends State<Check> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => StepDemo()),
+                        MaterialPageRoute(builder: (context) => Sleep()),
                       );
                     },
                     child: Image(

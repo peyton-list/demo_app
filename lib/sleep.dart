@@ -1,12 +1,12 @@
 import 'package:fit_kit/fit_kit.dart';
 import 'package:flutter/material.dart';
 
-class Fetish extends StatefulWidget {
+class Sleep extends StatefulWidget {
   @override
-  _FetishState createState() => _FetishState();
+  _SleepState createState() => _SleepState();
 }
 
-class _FetishState extends State<Fetish> {
+class _SleepState extends State<Sleep> {
 
   static var now = DateTime.now();
   final yesterday = DateTime(now.year, now.month, now.day);
@@ -18,19 +18,19 @@ class _FetishState extends State<Fetish> {
     final results = await FitKit.read(
       DataType.STEP_COUNT,
       dateFrom: DateTime.utc(
-        yesterday.year,
-        yesterday.month,
-        yesterday.day,
-        yesterday.hour,
-        yesterday.minute,
-        yesterday.second
+          yesterday.year,
+          yesterday.month,
+          yesterday.day,
+          yesterday.hour,
+          yesterday.minute,
+          yesterday.second
       ),
       dateTo: DateTime.now(),
     );
     return results;
   }
 
-  void sleep() async {
+  Future<List<FitData>> sleep() async {
     final results = await FitKit.read(
       DataType.SLEEP,
       dateFrom: DateTime.utc(
@@ -43,7 +43,7 @@ class _FetishState extends State<Fetish> {
       ),
       dateTo: DateTime.now(),
     );
-    print(results);
+    return results;
   }
 
   void readLast() async {
@@ -55,14 +55,14 @@ class _FetishState extends State<Fetish> {
       for (DataType type in DataType.values) {
         final results = await FitKit.read(
           type,
-            dateFrom: DateTime.utc(
-                yesterday.year,
-                yesterday.month,
-                yesterday.day,
-                yesterday.hour,
-                yesterday.minute,
-                yesterday.second
-            ),
+          dateFrom: DateTime.utc(
+              yesterday.year,
+              yesterday.month,
+              yesterday.day,
+              yesterday.hour,
+              yesterday.minute,
+              yesterday.second
+          ),
           dateTo: DateTime.now(),
         );
       }
@@ -81,12 +81,18 @@ class _FetishState extends State<Fetish> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: read(),
+      future: sleep(),
       initialData: "Loading text..",
       builder: (BuildContext context, AsyncSnapshot jay) {
         var stepCountSum = 0;
+        DateTime dateStart;
+        DateTime dateEnd;
         for(var i=0;i<jay.data.length;++i){
-          stepCountSum += jay.data[i].value;
+          print("MADARA");
+          dateStart = jay.data[i].dateFrom;
+          dateEnd = jay.data[i].dateTo;
+          Duration timeDiff = dateEnd.difference(dateStart);
+          stepCountSum += timeDiff.inHours.toInt();
         }
         return Scaffold(
           body: Container(
@@ -106,11 +112,11 @@ class _FetishState extends State<Fetish> {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Image(
-                      image: AssetImage('assets/run-steps.png'),
+                      image: AssetImage('assets/sleeping.png'),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'STEP COUNT TODAY',
+                      'SLEEP COUNT TODAY',
                       style: TextStyle(
                           fontSize: 40,
                           fontFamily: 'Bebas',
